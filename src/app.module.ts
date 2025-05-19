@@ -11,6 +11,8 @@ import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { HealthLogsModule } from './health-logs/health-logs.module';
 import { AdminModule } from './admin/admin.module';
 import { ConfigModule } from '@nestjs/config';
+import { typeOrmConfig } from './config/typeorm.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: `.env.${process.env.NODE_ENV || 'exp'}`,
       isGlobal: true,
     }),
+    TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
     UsersModule,
     ProfilesModule,
