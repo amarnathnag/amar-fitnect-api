@@ -10,10 +10,26 @@ import { AppointmentsModule } from './appointments/appointments.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { HealthLogsModule } from './health-logs/health-logs.module';
 import { AdminModule } from './admin/admin.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UsersModule, ProfilesModule, PlansModule, DoctorsModule, AppointmentsModule, SubscriptionsModule, HealthLogsModule, AdminModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env.${process.env.NODE_ENV || 'exp'}`,
+      isGlobal: true,
+    }),
+    AuthModule,
+    UsersModule,
+    ProfilesModule,
+    PlansModule,
+    DoctorsModule,
+    AppointmentsModule,
+    SubscriptionsModule,
+    HealthLogsModule,
+    AdminModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+
+export class AppModule { }
